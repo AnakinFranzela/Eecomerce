@@ -2,7 +2,7 @@
 using Eecomerce.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Eecomerce.Models.Services.Seed
+namespace Eecomerce.Models.Seeds
 {
     public class SeedCategoryData
     {
