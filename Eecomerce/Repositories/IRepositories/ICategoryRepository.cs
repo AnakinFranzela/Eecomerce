@@ -1,6 +1,6 @@
-﻿using Eecomerce.Models.Entities;
+﻿using Eecomerce.Entities;
 
-namespace Eecomerce.Models.Repositories.IRepositories
+namespace Eecomerce.Repositories.IRepositories
 {
     public interface ICategoryRepository
     {

@@ -1,8 +1,8 @@
 ﻿using Eecomerce.Data;
-using Eecomerce.Models.Entities;
-using Eecomerce.Models.Repositories.IRepositories;
+using Eecomerce.Entities;
+using Eecomerce.Repositories.IRepositories;
 
-namespace Eecomerce.Models.Repositories
+namespace Eecomerce.Repositories
 {
     public class CategoryRepository : ICategoryRepository
     {

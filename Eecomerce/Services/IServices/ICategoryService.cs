@@ -1,7 +1,7 @@
-﻿using Eecomerce.Models.Entities;
+﻿using Eecomerce.Entities;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace Eecomerce.Models.Services.IServices
+namespace Eecomerce.Services.IServices
 {
     public interface ICategoryService
     {

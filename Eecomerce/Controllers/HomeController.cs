@@ -1,4 +1,4 @@
-using Eecomerce.Models;
+using Eecomerce.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

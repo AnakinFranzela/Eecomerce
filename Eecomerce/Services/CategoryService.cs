@@ -1,9 +1,9 @@
-﻿using Eecomerce.Models.Entities;
-using Eecomerce.Models.Repositories.IRepositories;
-using Eecomerce.Models.Services.IServices;
+﻿using Eecomerce.Entities;
+using Eecomerce.Repositories.IRepositories;
+using Eecomerce.Services.IServices;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace Eecomerce.Models.Services
+namespace Eecomerce.Services
 {
     public class CategoryService : ICategoryService
     {

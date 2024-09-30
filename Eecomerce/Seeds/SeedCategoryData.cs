@@ -1,8 +1,8 @@
 ﻿using Eecomerce.Data;
-using Eecomerce.Models.Entities;
+using Eecomerce.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Eecomerce.Models.Seeds
+namespace Eecomerce.Seeds
 {
     public class SeedCategoryData
     {

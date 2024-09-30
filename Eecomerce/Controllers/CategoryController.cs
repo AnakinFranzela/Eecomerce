@@ -1,6 +1,7 @@
-﻿using Eecomerce.Models.Services.IServices;
-using Microsoft.AspNetCore.Mvc;
-using Eecomerce.Models.Entities;
+﻿using Microsoft.AspNetCore.Mvc;
+using Eecomerce.Entities;
+using Eecomerce.Services.IServices;
+using Eecomerce.ViewModels.Category;
 
 namespace Ecom.Controllers
 {
@@ -16,6 +17,12 @@ namespace Ecom.Controllers
         {
             List<Category> categoryList = _categoryService.GetCategoryList();
             return View(categoryList);
+        }
+
+        public IActionResult Upsert()
+        {
+            CategoryViewModel viewModel = new CategoryViewModel();
+            return View(viewModel);
         }
     }
 }

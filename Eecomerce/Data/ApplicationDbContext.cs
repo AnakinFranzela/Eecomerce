@@ -1,4 +1,4 @@
-﻿using Eecomerce.Models.Entities;
+﻿using Eecomerce.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Eecomerce.Data

@@ -1,10 +1,10 @@
 using Eecomerce.Data;
-using Eecomerce.Models.Repositories.IRepositories;
-using Eecomerce.Models.Repositories;
-using Eecomerce.Models.Services.IServices;
-using Eecomerce.Models.Services;
 using Microsoft.EntityFrameworkCore;
-using Eecomerce.Models.Seeds;
+using Eecomerce.Services;
+using Eecomerce.Services.IServices;
+using Eecomerce.Repositories;
+using Eecomerce.Repositories.IRepositories;
+using Eecomerce.Seeds;
 
 var builder = WebApplication.CreateBuilder(args);
 
