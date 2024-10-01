@@ -9,6 +9,14 @@ namespace Eecomerce.ViewModels.Category
 		[Required]
 		[DisplayName("Category Name")]
 		public string Name { get; set; }
+		[Required]
+		[DisplayName("Category Order")]
 		public int DisplayOrder { get; set; }
+
+		public void PopulateCategory(Eecomerce.Entities.Category category)
+		{
+			category.Name = Name;
+			category.DisplayOrder = DisplayOrder;
+		}
 	}
 }

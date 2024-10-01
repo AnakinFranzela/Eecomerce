@@ -6,5 +6,7 @@ namespace Eecomerce.Services.IServices
     public interface ICategoryService
     {
         public List<Category> GetCategoryList();
-    }
+        bool AddCategory(Category category);
+
+	}
 }

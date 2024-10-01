@@ -18,7 +18,8 @@ namespace Eecomerce.Repositories
             try
             {
                 _context.Categories.Add(category);
-                return true;
+                int stateNumber = _context.SaveChanges();
+                return stateNumber > 0;
             }
             catch
             {

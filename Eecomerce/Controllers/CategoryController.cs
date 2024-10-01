@@ -24,5 +24,22 @@ namespace Ecom.Controllers
             CategoryViewModel viewModel = new CategoryViewModel();
             return View(viewModel);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Upsert(CategoryViewModel viewModel)
+        {
+            Category category = new Category();
+
+            if(ModelState.IsValid)
+            {
+				viewModel.PopulateCategory(category);
+                if (_categoryService.AddCategory(category))
+                {
+                    return RedirectToAction("Index");
+                }
+			}
+            return View(viewModel);
+        }
     }
 }

@@ -19,5 +19,10 @@ namespace Eecomerce.Services
         {
             return _repository.ToList();
         }
+
+        public bool AddCategory(Category category)
+        {
+            return _repository.Add(category);
+        }
     }
 }
