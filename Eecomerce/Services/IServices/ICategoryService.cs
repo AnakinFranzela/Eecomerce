@@ -7,6 +7,7 @@ namespace Eecomerce.Services.IServices
     {
         public List<Category> GetCategoryList();
         bool AddCategory(Category category);
+        Category? GetCategoryById(int? id);
 
 	}
 }

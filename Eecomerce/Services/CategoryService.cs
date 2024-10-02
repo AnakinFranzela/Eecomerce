@@ -24,5 +24,10 @@ namespace Eecomerce.Services
         {
             return _repository.Add(category);
         }
+
+        public Category? GetCategoryById(int? id)
+        {
+            return _repository.FindById(id);
+        }
     }
 }

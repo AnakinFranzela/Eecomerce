@@ -15,8 +15,23 @@ namespace Eecomerce.ViewModels.Category
 
 		public void PopulateCategory(Eecomerce.Entities.Category category)
 		{
+			if(Id != null && Id != 0)
+			{
+				category.Id = (int)Id;
+			}
 			category.Name = Name;
 			category.DisplayOrder = DisplayOrder;
+		}
+
+		public void PopulateFromCategory(Eecomerce.Entities.Category? category)
+		{
+			if(category == null)
+			{
+				return;
+			}
+			Id = category.Id;
+			Name = category.Name;
+			DisplayOrder = category.DisplayOrder;
 		}
 	}
 }

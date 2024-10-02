@@ -31,5 +31,16 @@ namespace Eecomerce.Repositories
         {
             return _context.Categories.ToList();
         }
+
+        public Category? FindById(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return null;
+            }
+
+            Category? category = _context.Categories.Find(id);
+            return category;
+        }
     }
 }
