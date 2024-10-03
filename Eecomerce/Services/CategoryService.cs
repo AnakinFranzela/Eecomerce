@@ -17,7 +17,14 @@ namespace Eecomerce.Services
 
         public List<Category> GetCategoryList()
         {
-            return _repository.ToList();
+            try
+            {
+                return _repository.ToList();
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public bool AddCategory(Category category)
@@ -28,6 +35,18 @@ namespace Eecomerce.Services
         public Category? GetCategoryById(int? id)
         {
             return _repository.FindById(id);
+        }
+
+        public bool UpdateCategory(Category category)
+        {
+            try
+            {
+                return _repository.Update(category);
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

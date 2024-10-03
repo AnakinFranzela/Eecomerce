@@ -44,17 +44,30 @@ namespace Ecom.Controllers
         {
             Category category = new Category();
 
-            if(viewModel.Id == null && ModelState.IsValid)
+            if (viewModel.Id == null && ModelState.IsValid)
             {
-				viewModel.PopulateCategory(category);
+                viewModel.PopulateCategory(category);
                 if (_categoryService.AddCategory(category))
                 {
                     TempData["success"] = "Category was created successfully!";
                     return RedirectToAction("Index");
                 }
                 TempData["error"] = "Unable to create category!";
-			}
-            return View(viewModel);
-        }
+            }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    viewModel.PopulateCategory(category);
+                    if(_categoryService.UpdateCategory(category))
+                    {
+                        TempData["success"] = "Category was updated successfully!";
+                        return RedirectToAction("Index");
+                    }
+                    TempData["error"] = "Unable to update category!";
+                }
+            }
+			return View(viewModel);
+		}
     }
 }

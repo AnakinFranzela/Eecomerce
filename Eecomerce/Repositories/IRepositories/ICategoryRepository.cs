@@ -7,6 +7,9 @@ namespace Eecomerce.Repositories.IRepositories
         bool Add(Category entity);
         List<Category> ToList();
         Category? FindById(int? id);
+        bool Update(Category category);
+
+
 
     }
 }

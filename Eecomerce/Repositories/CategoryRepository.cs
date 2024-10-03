@@ -27,7 +27,21 @@ namespace Eecomerce.Repositories
             }
         }
 
-        public List<Category> ToList()
+		public bool Update(Category category)
+		{
+			try
+			{
+				_context.Categories.Update(category);
+				int stateNumber = _context.SaveChanges();
+				return stateNumber > 0;
+			}
+			catch
+			{
+				return false;
+			}
+		}
+
+		public List<Category> ToList()
         {
             return _context.Categories.ToList();
         }
