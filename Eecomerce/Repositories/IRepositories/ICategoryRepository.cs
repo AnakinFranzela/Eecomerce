@@ -8,8 +8,6 @@ namespace Eecomerce.Repositories.IRepositories
         List<Category> ToList();
         Category? FindById(int? id);
         bool Update(Category category);
-
-
-
-    }
+        bool Delete(int id);
+	}
 }

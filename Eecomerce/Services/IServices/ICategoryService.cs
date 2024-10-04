@@ -9,5 +9,6 @@ namespace Eecomerce.Services.IServices
         bool AddCategory(Category category);
         Category? GetCategoryById(int? id);
         bool UpdateCategory(Category category);
+        bool DeleteCategory(int id);
 	}
 }

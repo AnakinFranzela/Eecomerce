@@ -17,14 +17,7 @@ namespace Eecomerce.Services
 
         public List<Category> GetCategoryList()
         {
-            try
-            {
                 return _repository.ToList();
-            }
-            catch
-            {
-                return false;
-            }
         }
 
         public bool AddCategory(Category category)
@@ -47,6 +40,11 @@ namespace Eecomerce.Services
             {
                 return false;
             }
+        }
+
+        public bool DeleteCategory(int id)
+        {
+            return _repository.Delete(id);
         }
     }
 }

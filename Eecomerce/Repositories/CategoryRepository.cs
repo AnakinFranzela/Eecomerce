@@ -56,5 +56,25 @@ namespace Eecomerce.Repositories
             Category? category = _context.Categories.Find(id);
             return category;
         }
+
+        public bool Delete(int id)
+        {
+            Category? category = FindById(id);
+            if (category == null)
+            {
+                return false;
+            }
+
+            try
+            {
+                _context.Categories.Remove(category);
+                int stateNumber = _context.SaveChanges();
+                return stateNumber > 0;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }
