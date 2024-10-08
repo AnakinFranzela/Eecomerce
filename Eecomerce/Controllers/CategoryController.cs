@@ -2,6 +2,7 @@
 using Eecomerce.Entities;
 using Eecomerce.Services.IServices;
 using Eecomerce.ViewModels.Category;
+using Eecomerce.Helpers;
 
 namespace Ecom.Controllers
 {
@@ -114,6 +115,7 @@ namespace Ecom.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(CategoryViewModel viewModel)
         {
+            _categoryService.SetModelStateDictionary(new ModelStateWrapper(ModelState));
 			Category category = new Category();
 
 			viewModel.PopulateCategory(category);

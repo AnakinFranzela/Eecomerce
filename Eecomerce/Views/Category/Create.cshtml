@@ -1,12 +1,12 @@
 ﻿@model CategoryViewModel
 
-<form method="post">
+<form asp-controller="Category" asp-action="Create" method="post">
 	<input type="hidden" asp-for="Id" />
 	<div class="border p-3 mt-4">
 		<div class="row pb-2">
 			<h2 class="text-primary">Create Category</h2>
 		</div>
-		<div asp-validation-summary="All"></div>
+		<div asp-validation-summary="All"></div> @* asp-validation-summary се използва за да ни изпише всички проблеми отгоре *@
 		<div class="row mb-3 p-1">
 			<label asp-for="Name" class="p-0"></label>
 			<input asp-for="Name" class="form-control" />
@@ -17,7 +17,7 @@
 			<input asp-for="DisplayOrder" class="form-control" />
 			<span asp-validation-for="DisplayOrder" class="text-danger"></span>
 		</div>
-		<div class="row justify-content-center">
+		<div class="row justify-content-center"> 
 			<div class="col-6 col-md-3">
 				<button type="submit" class="btn btn-primary form-control">Create</button>
 			</div>

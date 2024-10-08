@@ -1,4 +1,5 @@
 ﻿using Eecomerce.Entities;
+using Eecomerce.Helpers;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Eecomerce.Services.IServices
@@ -10,5 +11,6 @@ namespace Eecomerce.Services.IServices
         Category? GetCategoryById(int? id);
         bool UpdateCategory(Category category);
         bool DeleteCategory(int id);
+        void SetModelStateDictionary(IValidationDictionary modelState);
 	}
 }
