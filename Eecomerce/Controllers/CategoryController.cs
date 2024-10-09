@@ -95,6 +95,7 @@ namespace Ecom.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Update(CategoryViewModel viewModel)
         {
+			_categoryService.SetModelStateDictionary(new ModelStateWrapper(ModelState));
 			Category category = new Category();
 
 			if (ModelState.IsValid)

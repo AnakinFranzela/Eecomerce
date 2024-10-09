@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace Eecomerce.Helpers
+namespace Eecomerce.Helpers //Самият клас отделя Service-a от Контролера
 {
 	public class ModelStateWrapper : IValidationDictionary
 	{

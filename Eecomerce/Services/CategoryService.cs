@@ -38,7 +38,7 @@ namespace Eecomerce.Services
 
         public List<Category> GetCategoryList()
         {
-                return _repository.ToList();
+            return _repository.ToList();
         }
 
         public bool AddCategory(Category category)

@@ -1,6 +1,6 @@
 ﻿@model CategoryViewModel
 
-<form method="post">
+<form asp-controller="Category" asp-action="Update" method="post">
 	<input type="hidden" asp-for="Id" />
 	<div class="border p-3 mt-4">
 		<div class="row pb-2">
