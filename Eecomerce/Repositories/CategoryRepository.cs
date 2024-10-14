@@ -46,6 +46,18 @@ namespace Eecomerce.Repositories
             return _context.Categories.ToList();
         }
 
+        public Category? CheckForExistingCategory(string? categoryName)
+        {
+            List<Category> categories = _context.Categories.ToList();
+            if (String.IsNullOrEmpty(categoryName))
+            {
+                return null;
+            }
+
+            return _context.Categories.Where(s => s.Name!.ToUpper().Equals(categoryName.ToUpper())).FirstOrDefault();
+
+		}
+
         public Category? FindById(int? id)
         {
             if (id == null || id == 0)

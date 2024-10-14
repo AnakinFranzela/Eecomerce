@@ -3,6 +3,7 @@ using Eecomerce.Helpers;
 using Eecomerce.Repositories.IRepositories;
 using Eecomerce.Services.IServices;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.Text.RegularExpressions;
 
 namespace Eecomerce.Services
 {
@@ -33,7 +34,20 @@ namespace Eecomerce.Services
                 _modelState.AddError("Name", "\"Test\" is an invalid value!");
             }
 
-            return _modelState.IsValid;
+            Category category1 = _repository.CheckForExistingCategory(category.Name);
+            if (category1 != null)
+            {
+                _modelState.AddError("", $"Category {category1.Name} already exists.");
+            }
+
+            Regex regex = new Regex(@"\d+");
+            Match match = regex.Match(category.Name);
+            if (match.Success)
+            {
+                _modelState.AddError("", "Category name can not have a number.");
+            }
+
+			return _modelState.IsValid;
         }
 
         public List<Category> GetCategoryList()

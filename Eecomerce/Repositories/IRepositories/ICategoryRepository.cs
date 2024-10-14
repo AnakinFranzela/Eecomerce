@@ -9,5 +9,6 @@ namespace Eecomerce.Repositories.IRepositories
         Category? FindById(int? id);
         bool Update(Category category);
         bool Delete(int id);
+        Category? CheckForExistingCategory(string? categoryName);
 	}
 }
