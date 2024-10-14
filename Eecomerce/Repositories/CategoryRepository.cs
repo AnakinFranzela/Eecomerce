@@ -48,7 +48,6 @@ namespace Eecomerce.Repositories
 
         public Category? CheckForExistingCategory(string? categoryName)
         {
-            List<Category> categories = _context.Categories.ToList();
             if (String.IsNullOrEmpty(categoryName))
             {
                 return null;

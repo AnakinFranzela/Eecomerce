@@ -34,10 +34,13 @@ namespace Eecomerce.Services
                 _modelState.AddError("Name", "\"Test\" is an invalid value!");
             }
 
-            Category category1 = _repository.CheckForExistingCategory(category.Name);
-            if (category1 != null)
+            Category? category1 = _repository.CheckForExistingCategory(category.Name);
+            if(category1 != null)
             {
-                _modelState.AddError("", $"Category {category1.Name} already exists.");
+                if(category.Id != category1.Id)
+                {
+                    _modelState.AddError("", $"Category {category1.Name} already exists.");
+                }
             }
 
             Regex regex = new Regex(@"\d+");
