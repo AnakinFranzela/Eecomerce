@@ -154,5 +154,11 @@ namespace Ecom.Controllers
 			}
 			return RedirectToAction("Index");
 		}
+
+		public IActionResult GetTableData()
+		{
+			List<Category> categoryList = _categoryService.GetCategoryList();
+			return Json(new { data = categoryList });
+		}
 	}
 }

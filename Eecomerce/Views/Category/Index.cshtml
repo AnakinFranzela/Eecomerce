@@ -2,15 +2,22 @@
 <a asp-controller="Category" asp-action="Create" class="btn btn-primary mx-2">Add Category</a>
 
 <h1>Category List</h1>
-<table class="table table-bordered table-striped">
+<table id="category-table" class="table table-bordered table-striped">
     <thead>
         <tr>
             <th>Category Name</th>
             <th>Display Order</th>
-            <th style="width: 25%"></th>
+            <th></th>
         </tr>
     </thead>
-    <tbody>
+</table>
+
+@section Scripts {
+    <script src="~/js/category/index.js"></script>
+    <script src="~/js/datatables/datatables.min.js"></script>
+}
+
+@* <tbody>
         @foreach (var obj in Model)
         {
             <tr>
@@ -32,6 +39,4 @@
                 </td>
             </tr>
         }
-    </tbody>
-</table>
-
+    </tbody> *@
