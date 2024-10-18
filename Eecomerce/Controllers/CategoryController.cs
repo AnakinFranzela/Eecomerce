@@ -16,8 +16,7 @@ namespace Ecom.Controllers
 
 		public IActionResult Index()
 		{
-			List<Category> categoryList = _categoryService.GetCategoryList();
-			return View(categoryList);
+			return View();
 		}
 
 		//     public IActionResult Upsert(int? id)
@@ -155,7 +154,7 @@ namespace Ecom.Controllers
 			return RedirectToAction("Index");
 		}
 
-		public IActionResult GetTableData()
+		public IActionResult Get()
 		{
 			List<Category> categoryList = _categoryService.GetCategoryList();
 			return Json(new { data = categoryList });
