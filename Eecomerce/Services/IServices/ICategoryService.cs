@@ -1,4 +1,5 @@
-﻿using Eecomerce.Entities;
+﻿using Eecomerce.DTO;
+using Eecomerce.Entities;
 using Eecomerce.Helpers;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
@@ -12,5 +13,7 @@ namespace Eecomerce.Services.IServices
         bool UpdateCategory(Category category);
         bool DeleteCategory(int id);
         void SetModelStateDictionary(IValidationDictionary modelState);
-	}
+        public SearchResult<Category> Search(Category category, string sortColumn, int start, int length);
+
+    }
 }

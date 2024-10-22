@@ -1,11 +1,16 @@
 ﻿<a asp-controller="Category" asp-action="Create" class="btn btn-primary mx-2">Add Category</a>
 
 <h1>Category List</h1>
-<table id="category-table" class="table table-bordered table-striped">
+<table id="category-table" class="table table-bordered table-striped text-end">
     <thead>
         <tr>
             <th>Category Name</th>
             <th>Display Order</th>
+            <th></th>
+        </tr>
+        <tr>
+            <th></th>
+            <th></th>
             <th></th>
         </tr>
     </thead>
@@ -18,14 +23,37 @@
     <script>
         function loadDataTable() {
             $("#category-table").DataTable({
+                processing: true,
+                serverSide: true,
+                paging: true,
+                bSortCellsTop: true,
+                sDom: 'ltipr',
                 ajax: { url: '/category/get' },
+                initComplete: function () {
+                    this.api().columns([0, 1]).every(function () { 
+                        let column = this;
+                        let title = column.header(0).textContent;
+
+                        //Create input element
+                        let input = document.createElement('input');
+                        input.style.width = '100%';
+                        input.placeholder = title;
+                        column.header(1).replaceChildren(input);
+
+                        //Event listener for user input
+                        input.addEventListener('keyup', () => {
+                            if (column.search() !== this.value)
+                                column.search(input.value).draw();
+                        })
+                    });
+                },
                 columns: [
                     { data: 'name', width: '45%' },
                     { data: 'displayOrder', width: '45%' },
                     {
                         data: 'id',
                         render: function (data) {
-                            return `<div class=" btn-group" role="group">
+                            return `<div class="d-flex flex-row justify-content-center" role="group">
                                 <a href="/category/update?id=${data}" class="btn btn-primary mx-2">
                                     <i class="bi bi-pencil-square">Edit</i>
                                 </a>

@@ -4,6 +4,7 @@ using Eecomerce.Repositories.IRepositories;
 using Eecomerce.Services.IServices;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Text.RegularExpressions;
+using Eecomerce.DTO;
 
 namespace Eecomerce.Services
 {
@@ -98,6 +99,11 @@ namespace Eecomerce.Services
         public bool DeleteCategory(int id)
         {
             return _repository.Delete(id);
+        }
+
+        public SearchResult<Category> Search(Category category, string sortColumn, int start, int length)
+        {
+            return _repository.GetPageData(category, sortColumn, start, length);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Eecomerce.Entities;
+﻿using Eecomerce.DTO;
+using Eecomerce.Entities;
 
 namespace Eecomerce.Repositories.IRepositories
 {
@@ -10,5 +11,7 @@ namespace Eecomerce.Repositories.IRepositories
         bool Update(Category category);
         bool Delete(int id);
         Category? CheckForExistingCategory(string? categoryName);
-	}
+        SearchResult<Category> GetPageData(Category category, string sortColumn, int start, int length);
+
+    }
 }

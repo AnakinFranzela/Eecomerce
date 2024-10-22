@@ -3,15 +3,19 @@ using Eecomerce.Entities;
 using Eecomerce.Services.IServices;
 using Eecomerce.ViewModels.Category;
 using Eecomerce.Helpers;
+using System.Web;
+using Eecomerce.DTO;
 
 namespace Ecom.Controllers
 {
 	public class CategoryController : Controller
 	{
 		private ICategoryService _categoryService;
-		public CategoryController(ICategoryService categoryService)
+		private IHttpContextAccessor _httpContextAccessor;
+		public CategoryController(ICategoryService categoryService, IHttpContextAccessor httpContextAccessor)
 		{
 			_categoryService = categoryService;
+			_httpContextAccessor = httpContextAccessor;
 		}
 
 		public IActionResult Index()
@@ -154,10 +158,57 @@ namespace Ecom.Controllers
 			return RedirectToAction("Index");
 		}
 
-		public IActionResult Get()
+		public IActionResult Get(int draw, int start, int length)
 		{
-			List<Category> categoryList = _categoryService.GetCategoryList();
-			return Json(new { data = categoryList });
+			PrintUrlQueryParamsInConsole();
+            string urlQuery = _httpContextAccessor.HttpContext.Request.QueryString.Value;
+            var paramsCollection = HttpUtility.ParseQueryString(urlQuery);
+			
+			//Get search params
+			string? name = paramsCollection["columns[0][search][value]"];
+			string? defaultOrder = paramsCollection["columns[1][search][value]"];
+
+			//Get sort
+			string? sortColumnIndex = paramsCollection["order[0][column]"];
+			string? sortColumnName = paramsCollection["columns[" + sortColumnIndex + "][data]"];
+			string? sortDirection = paramsCollection["order[0][dir]"];
+			string sortColumn = "";
+
+			Category category = new Category();
+			category.Name = name;
+			if(!String.IsNullOrEmpty(defaultOrder))
+			{
+				category.DisplayOrder = int.Parse(defaultOrder);
+			}
+
+			if(sortDirection == "asc")
+			{
+				sortColumn = sortColumnName;
+			}
+			else
+			{
+				sortColumn = $"-{sortColumnName}";
+			}
+
+			SearchResult<Category> result = _categoryService.Search(category, sortColumn, start, length);
+
+			return Ok(new
+			{
+				draw = draw,
+				recordsTotal = result.RowCount,
+				recordsFiltered = result.RowCount,
+				data = result.Data
+			});
+		}
+
+		private void PrintUrlQueryParamsInConsole()
+		{
+			string urlQuery = _httpContextAccessor.HttpContext.Request.QueryString.Value;
+			var paramsCollection = HttpUtility.ParseQueryString(urlQuery);
+			foreach (var key in paramsCollection.AllKeys)
+			{
+                Console.WriteLine($"Key: {key} => Value: {paramsCollection[key]}");
+            }
 		}
 	}
 }
