@@ -30,7 +30,7 @@ namespace Eecomerce.Services
                 throw new ArgumentNullException(nameof(_modelState));
             }
 
-            if(category.Name.ToLower() == "test")
+            if(!String.IsNullOrEmpty(category.Name) && category.Name.ToLower() == "test")
             {
                 _modelState.AddError("Name", "\"Test\" is an invalid value!");
             }
