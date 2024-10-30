@@ -1,3 +1,10 @@
 ﻿@model CategoryViewModel
 
 @Html.Partial("_Form", Model)
+ction
+@*Sections don't work in partial views and that is by design.*@
+@section Scripts {
+	@{
+		<partial name="_ValidationScriptsPartial.cshtml" />
+	}
+}
