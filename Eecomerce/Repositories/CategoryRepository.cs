@@ -8,7 +8,8 @@ namespace Eecomerce.Repositories
     public class CategoryRepository : ICategoryRepository
     {
         private readonly ApplicationDbContext _context;
-        private int RowCount { get; set; }
+        private int RecordsTotal { get; set; }
+        private int RecordsFiltered { get; set; }
 
         public CategoryRepository(ApplicationDbContext context)
         {
@@ -93,12 +94,18 @@ namespace Eecomerce.Repositories
         public SearchResult<Category> GetPageData(Category category, string sortColumn, int start, int length)
         {
             IQueryable<Category> query = _context.Set<Category>();
+            RecordsTotal = query.Count();
+
             query = Search(category, query);
+            RecordsFiltered = query.Count();
+
             query = OrderBy(sortColumn, query);
             query = WithPagination(start, length, query);
 
             SearchResult<Category> result = new SearchResult<Category>();
-            result.RowCount = RowCount;
+
+            result.RecordsTotal = RecordsTotal;
+            result.RecordsFiltered = RecordsFiltered;
             result.Data = query.ToList();
             return result;
         }
@@ -120,7 +127,6 @@ namespace Eecomerce.Repositories
 
         private IQueryable<Category> WithPagination(int start, int length, IQueryable<Category> query)
         {
-            RowCount = query.Count();
             return query.Skip(start).Take(length);
         }
 
