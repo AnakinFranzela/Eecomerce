@@ -1,20 +1,38 @@
-﻿<a asp-controller="Category" asp-action="Create" class="btn btn-primary mx-2">Add Category</a>
+﻿<div class="row">
+    <div class="col-12">
+        <h1>Списък с категории</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 d-flex justify-content-start">
+        <a asp-controller="Category" asp-action="Create" class="btn btn-primary">Add Category</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card mt-5 border-primary shadow-sm">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table id="category-table" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Име</th>
+                                <th>Ред на показване</th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<h1>Category List</h1>
-<table id="category-table" class="table table-bordered table-striped text-end">
-    <thead>
-        <tr>
-            <th>Category Name</th>
-            <th>Display Order</th>
-            <th></th>
-        </tr>
-        <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>
-</table>
 
 
 
@@ -29,6 +47,29 @@
                 bSortCellsTop: true,
                 sDom: 'ltipr',
                 ajax: { url: '/category/get' },
+                language: {
+                    sEmptyTable: "В таблицата няма данни",
+                    sInfo: "Показване на _START_ до _END_ от _TOTAL_ записа.",
+                    sInfoEmpty: "Показани са от 0 до 0 от 0 записа",
+                    sInfoFiltered: "(Филтрирани от _MAX_ записа)",
+                        sInfoPostFix: "",
+                        sInfoThousands: ",",
+                        sLengthMenu: "Показване на _MENU_ записа",
+                        sLoadingRecords: "Зарежда...",
+                        sProccessing: "Получаване...",
+                        sSearch: "Търсене:",
+                        sZeroRecords: "Няма намерени попадения...",
+                        // oPaginate: {
+                        //     sFirst: "Начало",
+                        //     sLast: "Край",
+                        //     sNext: "Следващ",
+                        //     sPrevious: "Предишен"
+                        // },
+                    oAria: {
+                        sSortAscending: ": Активирайте дисплея във възходящ ред",
+                        sSortDescending: ": Активирайте дисплея в низходящ ред"
+                    }
+                },
                 initComplete: function () {
                     this.api().columns([0, 1]).every(function () { 
                         let column = this;
@@ -47,21 +88,30 @@
                         })
                     });
                 },
+                columnDefs: [
+                    // Center align the header content of column 1
+                    { className: "dt-head-center", targets: [0, 1] },
+                    // Center align the body content of columns 0, 1
+                    { className: "dt-body-right", targets: [0, 1] }
+                ],
                 columns: [
-                    { data: 'name', width: '45%' },
-                    { data: 'displayOrder', width: '45%' },
+                    { data: 'name', width: '45%', },
+                    { data: 'displayOrder', width: '45%', },
                     {
                         data: 'id',
-                        render: function (data) {
+                        orderable: 'false',
+                        //Link on how to access other columns data:
+                        //https://stackoverflow.com/questions/67380020/how-to-pass-multiple-parameters-in-columns-render-function-in-datatables-jquery
+                        render: function (data, type, row, meta) {
                             return `<div class="d-flex flex-row justify-content-center" role="group">
-                                <a href="/category/update?id=${data}" class="btn btn-primary mx-2">
-                                    <i class="bi bi-pencil-square">Edit</i>
+                                <a href="/category/update?id=${data}" title="Редактиране">
+                                    <i class="bi bi-pencil-square"></i>
                                 </a>
-                                <form method="post" action="/category/delete" onsubmit="return confirm('Do you really want to delete category');">
+                                <form method="post" action="/category/delete" onsubmit="return confirm('Do you really want to delete ${row.name}');">
                                 @Html.AntiForgeryToken()
                                     <input type="hidden" name="Id" value="${data}" />
-                                    <button type="submit" class="btn btn-danger">
-                                        <i class="bi-trash"></i>Delete
+                                    <button type="submit" title="Изтриване" style="border: none; color: red; background: none;">
+                                        <i class="bi-trash"></i>
                                     </button>
                                 </form>
                             </div>`;
